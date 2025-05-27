@@ -1,0 +1,30 @@
+
+CREATE TABLE Images (
+    id INTEGER PRIMARY KEY,
+    heroId INTEGER,
+    url TEXT,
+    --cardShow INTEGER DEFAULT,
+    FOREIGN KEY (heroId) REFERENCES Heroes(id) ON DELETE CASCADE
+);
+
+insert:
+INSERT INTO Images(heroId, url)
+VALUES(?, ?);
+
+--updateMainImage:
+--UPDATE Images
+--SET url = ? and mainFlag = 1
+--WHERE heroId = ? and card;
+
+selectImageByHeroId:
+SELECT url
+FROM Images
+WHERE heroId = ?;
+
+
+
+--changeCardImage:
+--UPDATE Images SET url = ?
+--WHERE heroId = ? and cardShow = 1;
+
+

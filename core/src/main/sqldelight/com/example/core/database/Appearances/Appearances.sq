@@ -1,0 +1,60 @@
+
+CREATE TABLE Appearances (
+    id INTEGER PRIMARY KEY,
+    gender TEXT,
+    race TEXT,
+    eyeColor TEXT,
+    hairColor TEXT
+    --FOREIGN KEY (heroId) REFERENCES Heroes(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE AppearanceHeight (
+    id INTEGER PRIMARY KEY,
+    heroId INTEGER,
+    height TEXT,
+    FOREIGN KEY (heroId) REFERENCES Appearances(id) ON DELETE CASCADE
+);
+
+CREATE TABLE AppearanceWeight (
+    id INTEGER PRIMARY KEY,
+    heroId INTEGER,
+    weight TEXT,
+    FOREIGN KEY (heroId) REFERENCES Appearances(id) ON DELETE CASCADE
+);
+
+
+
+insert:
+INSERT INTO Appearances
+(id, gender, race, eyeColor, hairColor)
+VALUES(?, ?, ?, ?, ?);
+
+insertHeight:
+INSERT INTO AppearanceHeight
+(heroId, height)
+VALUES(?, ?);
+
+insertWeight:
+INSERT INTO AppearanceWeight
+(heroId, weight)
+VALUES(?, ?);
+
+
+selectByHeroId:
+SELECT a.gender, a.race, a.eyeColor, a.hairColor
+FROM Appearances a
+WHERE a.id = ?;
+
+selectHeightByHeroId:
+SELECT height
+FROM AppearanceHeight
+WHERE heroId = ?;
+
+selectWeightByHeroId:
+SELECT weight
+FROM AppearanceWeight
+WHERE heroId = ?;
+
+
+

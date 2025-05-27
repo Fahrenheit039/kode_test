@@ -1,0 +1,23 @@
+
+CREATE TABLE Powerstats (
+    id INTEGER PRIMARY KEY,
+    intelligence TEXT,
+    strength TEXT,
+    speed TEXT,
+    durability TEXT,
+    power TEXT,
+    combat TEXT
+);
+
+insert:
+INSERT INTO Powerstats
+(id, intelligence, strength, speed, durability, power, combat)
+VALUES(?, ?, ?, ?, ?, ?, ?);
+
+selectByHeroId:
+SELECT p.intelligence, p.strength, p.speed,
+p.durability, p.power, p.combat
+FROM Powerstats p
+WHERE p.id = ?;
+
+

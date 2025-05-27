@@ -1,0 +1,20 @@
+
+CREATE TABLE Connections (
+    id INTEGER PRIMARY KEY,
+    groupAffiliation TEXT,
+    relatives TEXT
+);
+
+insert:
+INSERT INTO Connections
+(id, groupAffiliation, relatives)
+VALUES(?, ?, ?);
+
+
+selectByHeroId:
+SELECT c.groupAffiliation, c.relatives
+FROM Connections c
+WHERE c.id = ?;
+
+
+

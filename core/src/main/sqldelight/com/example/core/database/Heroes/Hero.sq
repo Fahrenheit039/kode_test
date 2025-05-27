@@ -1,0 +1,60 @@
+--package com.example.core.database; //не должно быть
+
+CREATE TABLE Heroes (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    isFavorite INTEGER DEFAULT 0 NOT NULL  --в sqlite аналог boolean
+);
+
+insert:
+INSERT INTO Heroes(id, name, isFavorite)
+VALUES(?, ?, ?);
+
+
+-- Получение всех героев
+getAllHeroes:
+SELECT * FROM Heroes;
+--SELECT h.id, h.name, h.isFavorite FROM Heroes h;
+
+countAllHeroes:
+SELECT COUNT(*) FROM Heroes;
+
+getAllDataAllHeroes:
+SELECT h.*,
+b.fullName, b.alterEgos, b.placeOfBirth, b.firstAppearance, b.publisher,
+p.intelligence, p.strength, p.speed, p.durability, p.power, p.combat,
+--a.height, a.weight,
+a.eyeColor, a.hairColor
+FROM Heroes h
+LEFT JOIN Biographies b ON h.id = b.id
+LEFT JOIN Powerstats p ON h.id = p.id
+LEFT JOIN Appearances a ON h.id = a.id;
+
+--getAllHeroesByFavorite:
+--SELECT * FROM Heroes ORDER BY isFavorite DESC, name ASC;
+
+selectById:
+SELECT h.id, h.name, --b.fullName, b.publisher,
+h.isFavorite
+FROM Heroes h
+--JOIN Biographies b ON h.id = b.id
+WHERE h.id = ?;  -- замените ? на нужный id
+
+
+updateFavorite:
+UPDATE Heroes SET isFavorite = ? WHERE id = ?;
+
+--selectByPublisherOld:
+--SELECT * FROM Heroes;
+--WHERE publisher = ?
+--ORDER BY isFavorite DESC, name ASC;
+
+--selectByPublisherNew:
+--SELECT h.id, h.name, b.fullName, b.publisher
+--FROM Heroes h
+--JOIN Biographies b ON h.id = b.heroId
+--WHERE b.publisher = ?
+--ORDER BY isFavorite DESC, name ASC;
+
+
+

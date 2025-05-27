@@ -1,0 +1,39 @@
+
+CREATE TABLE Biographies (
+    id INTEGER PRIMARY KEY,
+    fullName TEXT,
+    alterEgos TEXT,
+    placeOfBirth TEXT,
+    firstAppearance TEXT,
+    publisher TEXT
+);
+
+CREATE TABLE BiographiesAliases (
+    id INTEGER PRIMARY KEY,
+    heroId INTEGER,
+    alias TEXT,
+    FOREIGN KEY (heroId) REFERENCES Biographies(id) ON DELETE CASCADE
+);
+
+insert:
+INSERT INTO Biographies
+(id, fullName, alterEgos, placeOfBirth, firstAppearance, publisher)
+VALUES(?, ?, ?, ?, ?, ?);
+
+insertAliases:
+INSERT INTO BiographiesAliases
+(heroId, alias)
+VALUES(?, ?);
+
+
+selectByHeroId:
+SELECT b.fullName, b.alterEgos, b.placeOfBirth,
+b.firstAppearance, b.publisher
+FROM Biographies b
+WHERE b.id = ?;
+
+selectAliasesByHeroId:
+SELECT alias
+FROM BiographiesAliases
+WHERE heroId = ?;
+
